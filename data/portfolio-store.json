@@ -1,0 +1,482 @@
+{
+  "personalInfo": {
+    "name": "Sadik Hasnat",
+    "tagline": "Software Engineer & Mobile Systems Developer",
+    "shortBio": "Mobile and software engineer based in Khulna, Bangladesh. Currently developing robust Android and cross-platform applications at INTELLEEO while completing my BSc in Computer Science & Engineering.",
+    "extendedBio": "I specialize in architecture-first mobile development with Flutter, Dart, Android (Kotlin/Java), and modern TypeScript web platforms. My focus is on offline resilience, responsive UX, clean state isolation, and production-tested API integrations.",
+    "location": "Khulna, Bangladesh",
+    "currentRole": "Mobile Application Developer",
+    "currentCompany": "INTELLEEO",
+    "email": "as1780646@gmail.com",
+    "phone": "+8801798316467",
+    "whatsapp": "+8801798316467",
+    "githubUrl": "https://github.com/Sadihasnat91",
+    "linkedinUrl": "https://www.linkedin.com/in/sadik-hasnat-bb1164364/?isSelfProfile=true",
+    "facebookUrl": "https://www.facebook.com/sadik.hasnat.548957",
+    "instagramUrl": "https://www.instagram.com/sadik_hasnat_91/",
+    "cvAvailable": false,
+    "profileImagePath": "https://avatars.githubusercontent.com/u/152088012?s=400&u=ed0ecd3fd1396773b70ed0e4b52e373413e8a95a&v=4"
+  },
+  "projects": [
+    {
+      "slug": "fit-tracker",
+      "title": "FitTracker Health & Wellness Engine",
+      "tagline": "Local-first activity, nutrition, and biometric metric logging application",
+      "category": "Mobile Application",
+      "status": "production",
+      "isFeatured": true,
+      "role": "Lead Mobile Developer",
+      "timeline": "Production-ready build",
+      "summary": "A comprehensive cross-platform mobile health application featuring calorie balance tracking, hydration goals, timed workout sessions, and interactive biometric trend analytics.",
+      "targetUsers": "Fitness enthusiasts and active mobile users requiring reliable, offline-capable tracking of daily nutritional balance, hydration goals, and workout sets.",
+      "verifiedProblem": "Most commercial fitness apps require persistent cloud connectivity, mandate intrusive account creation before utility, and suffer from sluggish data entry during workouts.",
+      "verifiedSolution": "Engineered a local-first SQLite and Provider architecture in Flutter. Provides sub-millisecond local reads/writes, interactive data visualizations via fl_chart, and resilient permission-handled biometric health monitoring.",
+      "keyFeatures": [
+        "Local calorie expenditure and intake balance engine with custom food categorization",
+        "Interactive data visualizations with fl_chart showing weekly and monthly trendlines",
+        "Hydration monitoring with customizable daily goal counters and reminder schedules",
+        "Integrated stopwatch and interval workout session logger with historical analytics",
+        "Local-first SQLite schema with persistent state isolation via Provider pattern"
+      ],
+      "architecturalDecisions": [
+        "Selected SQLite (via sqflite/shared_preferences) for offline durability rather than purely remote backend databases.",
+        "Used Provider pattern for lightweight reactive state propagation, keeping business logic distinct from Material UI widgets.",
+        "Built decoupled repository abstractions to allow seamless future cloud sync integrations without touching widget trees."
+      ],
+      "challenges": [
+        {
+          "challenge": "Real-time chart rendering performance on mid-tier Android devices with high data density.",
+          "solution": "Downsampled historical trend data points into weekly aggregate windows before passing coordinates to fl_chart components."
+        },
+        {
+          "challenge": "Handling intermittent background timer execution across diverse Android battery optimization modes.",
+          "solution": "Stored epoch timestamps at session start and calculated deltas on lifecycle resume rather than relying on unthrottled background tick intervals."
+        }
+      ],
+      "knownLimitations": [
+        "Cloud backup and multi-device synchronization are in active development; all records currently persist locally to the host device.",
+        "Camera-based optical pulse detection relies on device hardware sensor availability."
+      ],
+      "techStack": {
+        "core": [
+          "Flutter",
+          "Dart",
+          "Provider",
+          "SQLite"
+        ],
+        "secondary": [
+          "fl_chart",
+          "Shared Preferences",
+          "Material 3",
+          "Intl"
+        ]
+      },
+      "metricsOrHighlights": [
+        "100% offline operational capability",
+        "Zero network latency on metric logging",
+        "Sub-100ms UI screen transition budgets"
+      ],
+      "links": {
+        "github": "https://github.com/sadikhasnat91/Exercise-Tracker",
+        "caseStudySlug": "fit-tracker",
+        "liveDemo": "https://github.com/sadikhasnat91/Exercise-Tracker"
+      }
+    },
+    {
+      "slug": "sadik-showcase-dash",
+      "title": "Daily Muslim",
+      "tagline": "High-performance portfolio analytics and interactive component library",
+      "category": "Mobile Application",
+      "status": "production",
+      "isFeatured": true,
+      "role": "Frontend Engineer",
+      "timeline": "Completed",
+      "summary": "Modern TypeScript web dashboard built with Vite, Tailwind CSS, and Framer Motion, engineered to deliver accessible dark-mode interactions and responsive layouts.",
+      "targetUsers": "Engineering managers, technical recruiters, and enterprise clients reviewing technical proficiencies and design system foundations.",
+      "verifiedProblem": "Typical portfolio starters rely on bloated templates, unoptimized CSS, generic AI aesthetics, and inaccessible markup that fails accessibility audits.",
+      "verifiedSolution": "Crafted an accessible, dark editorial interface utilizing atomic design tokens, strict TypeScript schemas with Zod, and motion wrappers that respect prefers-reduced-motion standards.",
+      "keyFeatures": [
+        "Type-safe form schema and validation using Zod",
+        "Strict dark editorial palette (#090B10, #121720, #C5F467) with WCAG AAA contrast ratios",
+        "Zero-dependency micro-animations with automatic reduced-motion accessibility fallbacks",
+        "Responsive typography and modular layout primitives built with Tailwind CSS"
+      ],
+      "architecturalDecisions": [
+        "Implemented central design tokens via CSS variables rather than hardcoded ad-hoc utility classes.",
+        "Enforced strict TypeScript configuration without loose `any` types to prevent runtime prop mismatches.",
+        "Used semantic HTML5 regions (<header>, <nav>, <main>, <section>, <article>, <footer>) for full screen-reader compliance."
+      ],
+      "challenges": [
+        {
+          "challenge": "Ensuring dark mode contrast compliance across nested card surface levels without washing out text readability.",
+          "solution": "Established a three-tier surface token hierarchy (#090B10 Base, #121720 Surface, #161D29 Elevated) paired with high-contrast text (#F5F7FA)."
+        },
+        {
+          "challenge": "Preventing layout shift and animation jank on lower-spec mobile devices.",
+          "solution": "Restricted transforms strictly to composite-only CSS properties (`opacity`, `transform`) and throttled resize handlers."
+        }
+      ],
+      "knownLimitations": [
+        "Dashboard currently displays curated project analytics rather than multi-user OAuth tenant login."
+      ],
+      "techStack": {
+        "core": [
+          "React",
+          "TypeScript",
+          "Tailwind CSS",
+          "Vite"
+        ],
+        "secondary": [
+          "Framer Motion",
+          "Lucide Icons",
+          "Radix UI",
+          "Zod"
+        ]
+      },
+      "metricsOrHighlights": [
+        "100% Lighthouse Accessibility score",
+        "Sub-50ms interaction response times",
+        "Full keyboard navigation & visible focus rings"
+      ],
+      "links": {
+        "github": "https://github.com/sadikhasnat91/Daily-Muslim",
+        "caseStudySlug": "sadik-showcase-dash",
+        "liveDemo": "https://daily-muslim-three.vercel.app"
+      }
+    },
+    {
+      "slug": "marginx",
+      "title": "MarginX — F-Commerce Profit & Expense Engine",
+      "tagline": "Profit transparency and unit economics tracker for social commerce merchants",
+      "category": "Full-Stack SaaS",
+      "status": "in-development",
+      "isFeatured": true,
+      "role": "Full-Stack & Systems Architect",
+      "timeline": "Active R&D",
+      "summary": "Financial analytics and operational expense calculator designed for Facebook-commerce merchants to track true net profit after factoring in return costs, courier fees, and advertising ad-spend.",
+      "targetUsers": "F-commerce and boutique online merchants in emerging markets managing high delivery return rates and ad costs.",
+      "verifiedProblem": "Merchants frequently confuse gross merchandise volume with net profitability, failing to account for courier return delivery penalties (RTO), packaging overhead, and escalating pay-per-click ads.",
+      "verifiedSolution": "Engineered a dedicated net-profit calculation engine that computes item-level margins, factoring in dynamic return rates, shipping tier costs, and blended customer acquisition costs (CAC).",
+      "keyFeatures": [
+        "True Net Margin calculator accounting for courier return-to-origin (RTO) penalty expenses",
+        "Ad-spend Return on Ad Spend (ROAS) break-even threshold analysis",
+        "Courier fee tier comparison matrix (e.g. Steadfast, Pathao, RedX integration ready)",
+        "Expense dashboard categorizing packaging, product sourcing, and marketing overhead"
+      ],
+      "architecturalDecisions": [
+        "Architected deterministic financial calculation functions isolated from UI rendering to allow easy unit testing of money math.",
+        "Used immutable transaction records to provide audit trails for daily courier delivery status adjustments."
+      ],
+      "challenges": [
+        {
+          "challenge": "Handling complex return-to-origin fee adjustments where merchants still incur two-way courier shipping bills.",
+          "solution": "Built a stateful delivery lifecycle state machine tracking Dispatched, Delivered, Returned, and Partially Returned states with automated cost attribution."
+        }
+      ],
+      "knownLimitations": [
+        "Automated webhook integrations with third-party courier APIs are currently in testing; initial release supports manual tier entry and bulk CSV reconciliation."
+      ],
+      "techStack": {
+        "core": [
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "PostgreSQL"
+        ],
+        "secondary": [
+          "Prisma ORM",
+          "Zod",
+          "Recharts"
+        ]
+      },
+      "metricsOrHighlights": [
+        "Accurate per-order net margin calculation",
+        "Zero hidden fee leakage in test models"
+      ],
+      "links": {
+        "github": "https://github.com/sadikhasnat91/MarginX",
+        "caseStudySlug": "marginx",
+        "liveDemo": "https://marginx-lyart.vercel.app"
+      }
+    },
+    {
+      "slug": "restroflow",
+      "title": "RestroFlow — Real-Time Restaurant Operations",
+      "tagline": "Table ordering, kitchen display, and POS billing orchestration system",
+      "category": "Full-Stack SaaS",
+      "status": "in-development",
+      "isFeatured": true,
+      "role": "Systems & Frontend Developer",
+      "timeline": "Active R&D",
+      "summary": "Streamlined restaurant workflow platform connecting floor order taking, kitchen display systems (KDS), and cash counter billing with minimal operational friction.",
+      "targetUsers": "Fast-casual restaurants, cafes, and dining spaces needing instant communication between waitstaff and kitchen stations.",
+      "verifiedProblem": "Paper tickets and disconnected POS terminals create kitchen bottlenecks, missed dietary modifications, and billing discrepancies during peak rush hours.",
+      "verifiedSolution": "Building a unified real-time workflow pipeline where waitstaff orders instantly sync to categorized kitchen display stations with status acknowledgments.",
+      "keyFeatures": [
+        "Table grid management with live occupancy and pending order indicators",
+        "Kitchen Display System (KDS) with color-coded preparation timers",
+        "Split-bill and instant thermal receipt printing pipeline",
+        "Offline-resilient order queue for network hiccup protection"
+      ],
+      "architecturalDecisions": [
+        "Designed event-driven state updates to maintain synchronized order tickets between kitchen and billing terminals.",
+        "Structured local caching so pending tickets remain accessible even if local router connectivity fluctuates."
+      ],
+      "challenges": [
+        {
+          "challenge": "Preventing race conditions when multiple waitstaff update table order additions simultaneously.",
+          "solution": "Implemented optimistic UI updates paired with server-authoritative incremental item batching."
+        }
+      ],
+      "knownLimitations": [
+        "Inventory auto-depletion by recipe ingredient is planned for the subsequent release phase."
+      ],
+      "techStack": {
+        "core": [
+          "React",
+          "TypeScript",
+          "Node.js",
+          "Tailwind CSS"
+        ],
+        "secondary": [
+          "WebSocket / SSE",
+          "PostgreSQL",
+          "Lucide Icons"
+        ]
+      },
+      "metricsOrHighlights": [
+        "Live order sync across stations",
+        "Rapid touch-optimized mobile UI"
+      ],
+      "links": {
+        "github": "https://github.com/sadikhasnat91/resto",
+        "caseStudySlug": "restroflow",
+        "liveDemo": "https://resto-lz6b.vercel.app"
+      }
+    },
+    {
+      "slug": "campusone",
+      "title": "CampusOne — Offline-First Student Academic Portal",
+      "tagline": "Academic scheduling, attendance tracker, and notices for university students",
+      "category": "Mobile Application",
+      "status": "in-development",
+      "isFeatured": false,
+      "role": "Mobile Developer",
+      "timeline": "Prototype & Validation",
+      "summary": "Mobile academic companion app enabling university students to access class routines, exam schedules, and attendance metrics without relying on erratic campus Wi-Fi.",
+      "targetUsers": "Undergraduate university students managing dynamic lecture schedules, assignment deadlines, and attendance criteria.",
+      "verifiedProblem": "University web portals are typically non-responsive on mobile devices, require repeated authentication, and become inaccessible when campus network connectivity drops.",
+      "verifiedSolution": "Engineered an offline-first mobile client that securely caches semester schedules, calculates threshold attendance percentages, and synchronizes noticeboard updates on network reconnect.",
+      "keyFeatures": [
+        "Offline class routine and examination timetable cache",
+        "Course-by-course attendance percentage calculator with warning thresholds",
+        "Assignment submission deadline countdown reminders",
+        "Local notification triggers for upcoming lectures"
+      ],
+      "architecturalDecisions": [
+        "Utilized local Hive/SQLite storage on Android to eliminate blank loading screens during network interruptions.",
+        "Engineered clean modular domain models separating routine parsing from UI rendering."
+      ],
+      "challenges": [
+        {
+          "challenge": "Handling unexpected routine changes announced outside official portal channels.",
+          "solution": "Added manual override capabilities allowing students to adjust individual class times locally."
+        }
+      ],
+      "knownLimitations": [
+        "Direct automated scraper integration with university portal API requires administrative API credentials currently pending approval."
+      ],
+      "techStack": {
+        "core": [
+          "Flutter",
+          "Dart",
+          "SQLite",
+          "Android"
+        ],
+        "secondary": [
+          "Shared Preferences",
+          "Local Notifications"
+        ]
+      },
+      "metricsOrHighlights": [
+        "Instant offline schedule availability",
+        "Zero battery drain background alerts"
+      ],
+      "links": {
+        "github": "https://github.com/sadikhasnat91/CampusOne",
+        "caseStudySlug": "campusone",
+        "liveDemo": "https://campus-one-chi.vercel.app"
+      }
+    },
+    {
+      "slug": "LineUpX",
+      "title": "LineUpX",
+      "tagline": "Structured keyword extraction and formatting audit tool for software engineers",
+      "category": "Mobile Application",
+      "status": "production",
+      "isFeatured": false,
+      "role": "Frontend & API Engineer",
+      "timeline": "Active R&D",
+      "summary": "Developer utility that parses resume text, evaluates ATS formatting readability, identifies missing tech stack keywords, and provides actionable engineering resume feedback.",
+      "targetUsers": "Software developers and junior engineers tailoring resumes for competitive international tech applications and applicant tracking systems.",
+      "verifiedProblem": "Candidates struggle to understand why resumes fail initial automated ATS screening filters due to parsing incompatibilities, missing role keywords, and vague project descriptions.",
+      "verifiedSolution": "Building a structured analysis workflow that extracts resume sections, compares competencies against targeted software engineering job descriptions, and highlights specific missing skills.",
+      "keyFeatures": [
+        "Section-by-section structural ATS readability audit",
+        "Skill gap detection matching candidate experience against job requirements",
+        "Actionable bullet point improvement recommendations",
+        "Local history log tracking resume iteration scores"
+      ],
+      "architecturalDecisions": [
+        "Decoupled document text extraction from LLM prompt orchestration to ensure predictable token usage and cost bounds.",
+        "Used Zod schemas to validate AI output payloads, preventing broken or hallucinated JSON structures from reaching the UI."
+      ],
+      "challenges": [
+        {
+          "challenge": "Inconsistent extraction from non-standard multi-column PDF resume layouts.",
+          "solution": "Implemented structured text normalization and column hierarchy flattening prior to analysis."
+        }
+      ],
+      "knownLimitations": [
+        "Complex graphics-heavy resumes require plain text fallback extraction; current release focuses on standard single/double column engineering formats."
+      ],
+      "techStack": {
+        "core": [
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "OpenAI / Claude API"
+        ],
+        "secondary": [
+          "Zod",
+          "PDF-parse",
+          "Lucide Icons"
+        ]
+      },
+      "metricsOrHighlights": [
+        "Strict schema-enforced analysis results",
+        "Privacy-first: local analysis persistence"
+      ],
+      "links": {
+        "github": "https://github.com/sadikhasnat91/lineupx",
+        "caseStudySlug": "ai-resume-analyzer",
+        "liveDemo": "https://lineupx-theta.vercel.app"
+      }
+    }
+  ],
+  "skills": [
+    {
+      "category": "Mobile Engineering",
+      "description": "Production mobile application architecture, state isolation, and device hardware APIs",
+      "skills": [
+        {
+          "name": "Flutter & Dart",
+          "verifiedContext": "Cross-platform mobile apps (FitTracker, CampusOne)",
+          "badge": "Primary"
+        },
+        {
+          "name": "Android Native (Java / Kotlin)",
+          "verifiedContext": "Native Android development, Jetpack, MVVM patterns",
+          "badge": "Core"
+        },
+        {
+          "name": "State Management (Provider / BLoC)",
+          "verifiedContext": "Clean reactive UI updates and separation of concerns"
+        },
+        {
+          "name": "Local Data (SQLite / Room / Shared Preferences)",
+          "verifiedContext": "Offline-first transactional caching and persistence"
+        }
+      ]
+    },
+    {
+      "category": "Web & Frontend Architecture",
+      "description": "Modern, type-safe web systems built for speed, accessibility, and high performance",
+      "skills": [
+        {
+          "name": "TypeScript & JavaScript",
+          "verifiedContext": "Strict type-checking across Next.js and React apps",
+          "badge": "Core"
+        },
+        {
+          "name": "Next.js (App Router)",
+          "verifiedContext": "Server-side rendering, Turbopack, and static generation"
+        },
+        {
+          "name": "React 19 & Tailwind CSS",
+          "verifiedContext": "Component design systems and responsive token styling"
+        },
+        {
+          "name": "Motion & Animation",
+          "verifiedContext": "Purposeful UI transitions with prefers-reduced-motion support"
+        }
+      ]
+    },
+    {
+      "category": "Backend & Systems Integration",
+      "description": "RESTful communication, cloud services, and version-controlled team workflows",
+      "skills": [
+        {
+          "name": "Node.js & Express",
+          "verifiedContext": "Backend API routing, JSON payloads, and server integration",
+          "badge": "Core"
+        },
+        {
+          "name": "REST API Integration",
+          "verifiedContext": "High-throughput JSON parsing and async state handling"
+        },
+        {
+          "name": "Firebase (Auth, Firestore, Cloud Functions)",
+          "verifiedContext": "Real-time sync, cloud databases, and push notifications"
+        },
+        {
+          "name": "Git & GitHub Workflows",
+          "verifiedContext": "Branch management, semantic commits, and team collaboration"
+        },
+        {
+          "name": "Clean Architecture & MVC",
+          "verifiedContext": "Modular domain, data, and presentation layer boundaries"
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "BSc in Computer Science & Engineering",
+      "institution": "Northern University Business and Technology, Khulna",
+      "year": "Expected 2027",
+      "field": "Algorithms, Software Architecture, Database Systems"
+    },
+    {
+      "degree": "Higher Secondary Certificate (HSC)",
+      "institution": "Bongobandhu Govt College",
+      "year": "2021",
+      "field": "Science"
+    },
+    {
+      "degree": "Secondary School Certificate (SSC)",
+      "institution": "Khulna Zilla School",
+      "year": "2019",
+      "field": "Science"
+    },
+    {
+      "degree": "Visual Basic Expert",
+      "institution": "NTC",
+      "year": "2025",
+      "field": "মেজর বিষয়"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Mobile Application Developer",
+      "company": "INTELLEEO",
+      "location": "Khulna, Bangladesh",
+      "period": "Current Role",
+      "focus": [
+        "Engineering Android and cross-platform mobile client applications",
+        "Designing responsive interfaces and fluid mobile navigation patterns",
+        "Integrating RESTful backend APIs and local persistence pipelines"
+      ]
+    }
+  ]
+}
