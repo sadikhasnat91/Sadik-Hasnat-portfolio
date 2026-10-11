@@ -67,7 +67,12 @@ export default function AdminPage() {
             const contentRes = await fetch("/api/admin/content");
             if (contentRes.ok) {
               const contentData = await contentRes.json();
-              if (isMounted) setContent(contentData);
+              if (isMounted) {
+                if (contentData._storageInfo?.isSupabaseConfigured) {
+                  setIsSupabaseConnected(true);
+                }
+                setContent(contentData);
+              }
             }
           }
         }
@@ -127,12 +132,21 @@ export default function AdminPage() {
 
       const data = await res.json();
       if (res.ok) {
-        const destination = data.target === "supabase-cloud" ? "Supabase ক্লাউড ডেটাবেস" : "লোকাল ফাইল স্টোরেজ";
-        setSaveStatus({
-          message: `সব ডেটা সফলভাবে ${destination}-এ সংরক্ষিত হয়েছে! (Live updated)`,
-          type: "success",
-        });
-        setTimeout(() => setSaveStatus({ message: "", type: null }), 4500);
+        if (data.target === "supabase-cloud") {
+          setIsSupabaseConnected(true);
+          setSaveStatus({
+            message: "সব ডেটা সফলভাবে Supabase ক্লাউড ডেটাবেস-এ সংরক্ষিত হয়েছে! (Live cloud synced)",
+            type: "success",
+          });
+        } else {
+          setIsSupabaseConnected(false);
+          const errDetail = data.supabaseError ? ` (${data.supabaseError})` : "";
+          setSaveStatus({
+            message: `লোকাল ফাইলে সংরক্ষিত হয়েছে। Supabase ক্লাউডে সিঙ্ক হয়নি${errDetail}`,
+            type: "error",
+          });
+        }
+        setTimeout(() => setSaveStatus({ message: "", type: null }), 7000);
       } else {
         setSaveStatus({ message: data.error || "সেভ করতে সমস্যা হয়েছে", type: "error" });
       }

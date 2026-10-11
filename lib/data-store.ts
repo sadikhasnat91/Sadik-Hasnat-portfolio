@@ -45,8 +45,9 @@ export async function getPortfolioData(): Promise<PortfolioDatabase> {
  */
 export async function savePortfolioData(
   newData: PortfolioDatabase
-): Promise<{ success: boolean; message: string; target: string }> {
+): Promise<{ success: boolean; message: string; target: string; supabaseError?: string }> {
   let target = "local-file";
+  let supabaseErrorMsg: string | undefined = undefined;
 
   // 1. If Supabase is configured, save to Supabase
   if (isSupabaseConfigured && supabase) {
@@ -59,15 +60,20 @@ export async function savePortfolioData(
 
       if (error) {
         console.error("Supabase upsert error:", error);
+        supabaseErrorMsg = `${error.message || "Supabase upsert failed"} (code: ${error.code || "unknown"})`;
       } else {
         target = "supabase-cloud";
       }
-    } catch (err) {
-      console.error("Supabase save exception:", err);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error("Supabase save exception:", message);
+      supabaseErrorMsg = message;
     }
+  } else {
+    supabaseErrorMsg = "Supabase env variables (NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY) are missing or invalid.";
   }
 
-  // 2. Always persist locally to JSON file store as well
+  // 2. Always persist locally to JSON file store as well (reliable backup)
   try {
     fs.writeFileSync(DATA_FILE_PATH, JSON.stringify(newData, null, 2), "utf-8");
   } catch (err) {
@@ -76,7 +82,10 @@ export async function savePortfolioData(
 
   return {
     success: true,
-    message: `Data successfully saved to ${target}`,
+    message: target === "supabase-cloud"
+      ? "Data successfully saved to Supabase Cloud"
+      : `Saved to local file backup. Supabase: ${supabaseErrorMsg || "not configured"}`,
     target,
+    supabaseError: supabaseErrorMsg,
   };
 }
